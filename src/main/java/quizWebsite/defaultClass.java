@@ -1,6 +1,7 @@
 package quizWebsite;
 
 public class defaultClass {
+
 }
 //todo: add your own classes inside 'quizWebsite' package
 
