@@ -18,6 +18,7 @@ public class loginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         System.out.println("RECEIVED INFORMATION: " + username + ", " + password);
+        response.sendRedirect(request.getContextPath() + "/home");
 
     }
 

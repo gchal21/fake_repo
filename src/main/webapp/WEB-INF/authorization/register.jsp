@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>register</title>
-    <style><%@include file="/WEB-INF/css/register.css"%></style>
+    <style><%@include file="./css/register.css"%></style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">

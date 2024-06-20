@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>login</title>
-    <style><%@include file="/WEB-INF/css/login.css"%></style>
+    <style><%@include file="./css/login.css"%></style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">

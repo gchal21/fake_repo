@@ -1,0 +1,69 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #FFF455;
+}
+
+.itim-regular {
+    font-family: "Itim", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.wrapper{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 0.30fr;
+}
+
+.sidebar{
+    background-color: #FFC700;
+}
+
+.content_wrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.title_wrapper{
+    padding: 35px 50px 35px 50px;
+}
+
+.title{
+    color: #EE4E4E;
+    font-size: 48px;
+}
+
+.navbar_wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.navbar_wrapper > div{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.navbar_wrapper > div:nth-of-type(2){
+    padding-right: 92px;
+}
+
+.navbar_wrapper > div > a{
+    color: #EE4E4E;
+    font-size: 30px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.decorate_underline{
+    text-decoration: underline;
+}
+
