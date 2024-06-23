@@ -1,3 +1,5 @@
+USE oop_final_project_db;
+
 create table roles
 (
     id   int primary key,
@@ -20,6 +22,7 @@ VALUES (1, 'admin'),
        (2, 'standard-user');
 
 
+#   TODO also needs some insertion for default values
 create table achievements
 (
     id          int primary key,
@@ -27,6 +30,7 @@ create table achievements
     description nvarchar(500),
     imageUrl    nvarchar(500)
 );
+
 
 create table user_achievements
 (
