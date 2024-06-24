@@ -7,7 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-//TODO FINISH THIS CLASS
+//TODO FINISH THIS CLASS AND MERGE DAO CLASSES RELATED TO USERS INTO ONE CLASS
+//TODO TEST THIS CLASS
 public class FriendshipDAO {
     private final BasicDataSource dataSource;
 

@@ -9,9 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/*
-    todo maybe add something like a password changing method for the user (as an extension might be useful)
- */
+
+//todo maybe add something like a password changing method for the user (as an extension might be useful)
+
 public class UsersDAO {
     private final BasicDataSource dataSource;
     private final String USERS_TABLE = "users";

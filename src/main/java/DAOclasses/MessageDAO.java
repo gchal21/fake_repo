@@ -6,8 +6,10 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import java.sql.*;
 import java.util.ArrayList;
 
+//TODO TEST THIS CLASS
 public class MessageDAO {
     private final BasicDataSource dataSource;
+    private final String MESSAGES_TABLE = "messages";
 
 
     public MessageDAO(BasicDataSource source){
@@ -41,5 +43,23 @@ public class MessageDAO {
             throw new RuntimeException(e);
         }
         return messages;
+    }
+
+    /**
+        adds the given message into the database
+     */
+    public void sendMessage(long senderId, long receiverId, String content){
+        try {
+            Connection conn=dataSource.getConnection();
+            String insertSQL = "INSERT INTO "+MESSAGES_TABLE+" (senderId, receiverId, content) VALUES (?, ?, ?); ";
+            PreparedStatement statement= conn.prepareStatement(insertSQL);
+            statement.setLong(1, senderId);
+            statement.setLong(2, receiverId);
+            statement.setString(3, content);
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
