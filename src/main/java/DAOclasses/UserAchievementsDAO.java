@@ -6,6 +6,8 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import java.sql.*;
 import java.util.ArrayList;
 
+
+//todo merge DAO-s together and call them UserDao
 public class UserAchievementsDAO {
     private final BasicDataSource dataSource;
 
@@ -39,8 +41,6 @@ public class UserAchievementsDAO {
                 allAchievements.add(achievement);
             }
 
-            //todo i think u better do join and get all the info about achivement and not just id(as user_achievements saves it)
-            //todo merge DAO-s together and call them UserDao
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -68,4 +68,32 @@ public class UserAchievementsDAO {
         }
 
     }
+
+    /**
+     * removes given achievement for the given user
+     *
+     * NOTE: PDF STATES THAT ONCE USER RECEIVES AN ACHIEVEMENT
+     * BADGE, IT DOESN'T GO AWAY BUT STILL WE HAVE IT
+     * (MAYBE CONSIDER FOR EXTENSION)
+     * @param userId
+     * @param achievementId
+     */
+    public void removeUserAchievement(long userId, int achievementId){
+        try {
+            Connection conn=dataSource.getConnection();
+            String query = "DELETE FROM user_achievements WHERE userId = ? AND achievementId = ?;";
+            PreparedStatement statement= conn.prepareStatement(query); //todo check this is query string ok?
+            statement.setLong(1,userId);
+            statement.setInt(2, achievementId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
+
+
 }

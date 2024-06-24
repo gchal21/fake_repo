@@ -1,4 +1,5 @@
-USE oop_final_project_db;
+USE oop_final_project_db; #todo create database named like this by:
+                            #   CREATE DATABASE oop_final_project_db;
 
 create table roles
 (
