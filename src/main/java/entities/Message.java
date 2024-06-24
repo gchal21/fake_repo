@@ -32,4 +32,9 @@ public class Message {
     public void setSendDate(Timestamp sendDate) {
         this.sendDate = sendDate;
     }
+
+    @Override
+    public String toString() {
+        return "SENDER: " + senderUsername + " CONTENT: " + content + " SEND DATE: " + sendDate;
+    }
 }

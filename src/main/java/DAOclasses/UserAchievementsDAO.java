@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 
 //todo merge DAO-s together and call them UserDao
+//TODO TEST THIS CLASS
 public class UserAchievementsDAO {
     private final BasicDataSource dataSource;
 
