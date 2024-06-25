@@ -1,15 +1,10 @@
 <%@ page import="entities.Achievement" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: dvali
-  Date: 6/20/2024
-  Time: 10:45 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <style><%@include file="./css/home.css"%></style>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
@@ -99,6 +94,10 @@
                     }
                 %>
             </div>
+
+            <jsp:include page="./messages.jsp" />
+
+
 
         </section>
     </div>

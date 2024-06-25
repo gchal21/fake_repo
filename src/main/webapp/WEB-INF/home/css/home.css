@@ -8,6 +8,12 @@ body{
     background-color: #FFF455;
 }
 
+.border_box{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .itim-regular {
     font-family: "Itim", cursive;
     font-weight: 400;
@@ -16,13 +22,14 @@ body{
 
 .wrapper{
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: grid;
     grid-template-columns: 1fr 0.30fr;
 }
 
 .sidebar{
     background-color: #FFC700;
+    height: 100vh;
 }
 
 .content_wrapper{
@@ -67,9 +74,6 @@ a{
     text-decoration: underline;
 }
 
-.sidebar{
-
-}
 
 .sidebar_header{
     display: flex;
