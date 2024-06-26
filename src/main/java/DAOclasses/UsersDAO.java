@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 
 //todo maybe add something like a password changing method for the user (as an extension might be useful)
-
+//todo ADD FILTERING METHOD FOR SEARCHING (USE 'IS LIKE' IN SQL)
 public class UsersDAO {
     private final BasicDataSource dataSource;
     private final String USERS_TABLE = "users";
@@ -26,6 +26,10 @@ public class UsersDAO {
         (id of the given User is ignored cause table has auto generated id as primary key,
         also create date is ignored cause we let the table add the current time by default)
         todo maybe make it return int (0 for successful insertion, 1 if username exists, 2 if email exists)
+        NOTE: client is responsible to call getUser by username or email before calling AddUser
+        to see if that user already exists.
+        todo if it exists addUser will throw RuntimeException (change handling)
+
      */
     public void addUser(User newUser){
         try {
