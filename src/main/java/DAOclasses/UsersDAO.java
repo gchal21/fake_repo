@@ -26,10 +26,9 @@ public class UsersDAO {
         adds given user to the database
         (id of the given User is ignored cause table has auto generated id as primary key,
         also create date is ignored cause we let the table add the current time by default)
-        todo maybe make it return int (0 for successful insertion, 1 if username exists, 2 if email exists)
+
         NOTE: client is responsible to call getUser by username or email before calling AddUser
-        to see if that user already exists.
-        todo if it exists addUser will throw RuntimeException (change handling)
+        to see if that user already exists, else we throw runtime exception
 
      */
     public void addUser(User newUser){
@@ -43,18 +42,20 @@ public class UsersDAO {
             statement.setString(3, newUser.getEmail());
             statement.setInt(4, newUser.getRoleId());
             statement.execute();
-        } catch (java.sql.SQLIntegrityConstraintViolationException e) {
-            // Handle the specific case where the username or email already exists
-            if (e.getMessage().toLowerCase().contains("users.username")) {
-                System.out.println("The given username already exists.");
-            } else if (e.getMessage().toLowerCase().contains("users.email")) {
-                System.out.println("The given email already exists.");
-            } else {
-                // Print the general constraint violation message
-                System.out.println("Unique constraint violation: " + e.getMessage());
-            }
-        } catch (SQLException e) {
-            // Handle other SQL exceptions
+        }
+//        catch (java.sql.SQLIntegrityConstraintViolationException e) {
+//            // Handle the specific case where the username or email already exists
+//            if (e.getMessage().toLowerCase().contains("users.username")) {
+//                System.out.println("The given username already exists.");
+//            } else if (e.getMessage().toLowerCase().contains("users.email")) {
+//                System.out.println("The given email already exists.");
+//            } else {
+//                // Print the general constraint violation message
+//                System.out.println("Unique constraint violation: " + e.getMessage());
+//            }
+//        }
+        catch (SQLException e) {
+
             throw new RuntimeException(e);
         }
     }
