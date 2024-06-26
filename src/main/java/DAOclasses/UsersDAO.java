@@ -3,6 +3,7 @@ package DAOclasses;
 import entities.User;
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import javax.jws.soap.SOAPBinding;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -91,6 +92,43 @@ public class UsersDAO {
             throw new RuntimeException(e);
         }
         return user;
+    }
+
+    /**
+     * returns list of users if their username or email starts with the given prefix
+     * @param usernameOrMailPrefix
+     * @return
+     */
+    public ArrayList<User> getUserByPrefix(String usernameOrMailPrefix){
+        ArrayList<User> results=new ArrayList<>();
+        try {
+            Connection conn =dataSource.getConnection();
+            String query = "SELECT u.id, u.username, u.password, u.email, u.createDate, u.roleId" +
+                    " FROM "+USERS_TABLE+" AS u WHERE u.username LIKE ? OR u.email LIKE ? ;";
+
+
+            PreparedStatement statement =
+                    conn.prepareStatement(query);
+
+            statement.setString(1, usernameOrMailPrefix + "%");
+            statement.setString(2, usernameOrMailPrefix + "%");
+            ResultSet rs = statement.executeQuery();
+
+            while(rs.next()){
+                User user = new User(rs.getLong("id"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("email"),
+                        rs.getTimestamp("createDate"),
+                        rs.getInt("roleId"));
+
+                results.add(user);
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return results;
     }
 
     /**
