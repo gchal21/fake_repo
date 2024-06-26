@@ -3,6 +3,7 @@ package DAOclasses;
 import entities.User;
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import javax.jws.soap.SOAPBinding;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,10 +26,9 @@ public class UsersDAO {
         adds given user to the database
         (id of the given User is ignored cause table has auto generated id as primary key,
         also create date is ignored cause we let the table add the current time by default)
-        todo maybe make it return int (0 for successful insertion, 1 if username exists, 2 if email exists)
+
         NOTE: client is responsible to call getUser by username or email before calling AddUser
-        to see if that user already exists.
-        todo if it exists addUser will throw RuntimeException (change handling)
+        to see if that user already exists, else we throw runtime exception
 
      */
     public void addUser(User newUser){
@@ -42,18 +42,20 @@ public class UsersDAO {
             statement.setString(3, newUser.getEmail());
             statement.setInt(4, newUser.getRoleId());
             statement.execute();
-        } catch (java.sql.SQLIntegrityConstraintViolationException e) {
-            // Handle the specific case where the username or email already exists
-            if (e.getMessage().toLowerCase().contains("users.username")) {
-                System.out.println("The given username already exists.");
-            } else if (e.getMessage().toLowerCase().contains("users.email")) {
-                System.out.println("The given email already exists.");
-            } else {
-                // Print the general constraint violation message
-                System.out.println("Unique constraint violation: " + e.getMessage());
-            }
-        } catch (SQLException e) {
-            // Handle other SQL exceptions
+        }
+//        catch (java.sql.SQLIntegrityConstraintViolationException e) {
+//            // Handle the specific case where the username or email already exists
+//            if (e.getMessage().toLowerCase().contains("users.username")) {
+//                System.out.println("The given username already exists.");
+//            } else if (e.getMessage().toLowerCase().contains("users.email")) {
+//                System.out.println("The given email already exists.");
+//            } else {
+//                // Print the general constraint violation message
+//                System.out.println("Unique constraint violation: " + e.getMessage());
+//            }
+//        }
+        catch (SQLException e) {
+
             throw new RuntimeException(e);
         }
     }
@@ -91,6 +93,43 @@ public class UsersDAO {
             throw new RuntimeException(e);
         }
         return user;
+    }
+
+    /**
+     * returns list of users if their username or email starts with the given prefix
+     * @param usernameOrMailPrefix
+     * @return
+     */
+    public ArrayList<User> getUserByPrefix(String usernameOrMailPrefix){
+        ArrayList<User> results=new ArrayList<>();
+        try {
+            Connection conn =dataSource.getConnection();
+            String query = "SELECT u.id, u.username, u.password, u.email, u.createDate, u.roleId" +
+                    " FROM "+USERS_TABLE+" AS u WHERE u.username LIKE ? OR u.email LIKE ? ;";
+
+
+            PreparedStatement statement =
+                    conn.prepareStatement(query);
+
+            statement.setString(1, usernameOrMailPrefix + "%");
+            statement.setString(2, usernameOrMailPrefix + "%");
+            ResultSet rs = statement.executeQuery();
+
+            while(rs.next()){
+                User user = new User(rs.getLong("id"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("email"),
+                        rs.getTimestamp("createDate"),
+                        rs.getInt("roleId"));
+
+                results.add(user);
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return results;
     }
 
     /**
