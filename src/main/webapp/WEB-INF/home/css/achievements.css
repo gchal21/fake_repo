@@ -1,0 +1,21 @@
+
+.achievements_wrapper{
+    padding: 10px 5px;
+}
+
+.achievement_icon{
+    width: 60px;
+    height: 60px;
+}
+
+.no_achievement_p{
+    color: white;
+    font-size: 1.2em;
+}
+
+.icons_container{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+    flex-wrap: wrap;
+}

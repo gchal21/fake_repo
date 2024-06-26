@@ -55,35 +55,6 @@ body{
     font-size: 48px;
 }
 
-.navbar_wrapper{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.navbar_wrapper > div{
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.navbar_wrapper > div:nth-of-type(2){
-    padding-right: 92px;
-}
-
-.navbar_wrapper > div > a{
-    color: #EE4E4E;
-    font-size: 30px;
-}
-
-a{
-    text-decoration: none;
-}
-
-.decorate_underline{
-    text-decoration: underline;
-}
-
-
 .sidebar_header{
     display: flex;
     justify-content: center;
@@ -95,25 +66,4 @@ a{
 .sidebar_header > p{
     color: white;
     font-size: 3em;
-}
-
-.achievements_wrapper{
-    padding: 10px 5px;
-}
-
-.achievement_icon{
-    width: 60px;
-    height: 60px;
-}
-
-.no_achievement_p{
-    color: white;
-    font-size: 1.2em;
-}
-
-.icons_container{
-    display: flex;
-    justify-content: space-around;
-    padding-top: 20px;
-    flex-wrap: wrap;
 }
