@@ -1,4 +1,5 @@
-<%--
+<%@ page import="entities.Achievement" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: dvali
   Date: 6/20/2024
@@ -24,7 +25,6 @@
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
-                    document.getElementById("currentSection").textContent = response.currentSection;
 
                     const links = document.querySelectorAll(".navbar_wrapper a");
                     links.forEach(function (link) {
@@ -74,7 +74,32 @@
 
         </section>
         <section class="sidebar">
-            <p>Current Section: <span id="currentSection"><%= request.getAttribute("currentSection") %></span></p>
+            <div class="sidebar_header">
+                <p class="itim-regular"><%=request.getAttribute("userName")%></p>
+            </div>
+
+            <div class="achievements_wrapper">
+
+
+                <%
+                    List<Achievement> achievements = (List<Achievement>)request.getAttribute("achievements");
+                    if(achievements.isEmpty()){%>
+                        <p class="no_achievement_p itim-regular"> No Achievements </p>
+                <%  }else {
+                        %>
+                            <div class="icons_container">
+                        <%
+                        for(Achievement achievement : achievements){%>
+                            <img class="achievement_icon" alt="achievement icon" src="../../resources<%=achievement.getImageUrl()%>">
+                        <%
+                        }
+                        %>
+                            </div>
+                        <%
+                    }
+                %>
+            </div>
+
         </section>
     </div>
 </body>
