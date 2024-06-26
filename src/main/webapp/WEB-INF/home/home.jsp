@@ -97,8 +97,6 @@
 
             <jsp:include page="./messages.jsp" />
 
-
-
         </section>
     </div>
 </body>

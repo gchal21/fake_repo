@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+html, body{
+    height: 100%;
+    overflow: hidden;
+}
+
 body{
     background-color: #FFF455;
 }
@@ -28,8 +33,12 @@ body{
 }
 
 .sidebar{
+    display: flex;
+    flex-flow: column;
     background-color: #FFC700;
-    height: 100vh;
+    height: 100%;
+
+    overflow-y: auto;
 }
 
 .content_wrapper{
@@ -106,4 +115,5 @@ a{
     display: flex;
     justify-content: space-around;
     padding-top: 20px;
+    flex-wrap: wrap;
 }
