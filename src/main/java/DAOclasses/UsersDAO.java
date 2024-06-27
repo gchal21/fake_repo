@@ -2,8 +2,10 @@ package DAOclasses;
 
 import entities.User;
 import org.apache.commons.dbcp2.BasicDataSource;
+import services.UserManager;
+import utils.DataSourceConfig;
 
-import javax.jws.soap.SOAPBinding;
+import javax.servlet.http.HttpSession;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,9 +18,17 @@ import java.util.ArrayList;
 public class UsersDAO {
     private final BasicDataSource dataSource;
     private final String USERS_TABLE = "users";
-
-    public UsersDAO(BasicDataSource source){
+    private UsersDAO(BasicDataSource source){
         this.dataSource = source;
+    }
+
+    public static UsersDAO getInstance(HttpSession session){
+        UsersDAO usersDAO = (UsersDAO) session.getAttribute(UsersDAO.class.getSimpleName());
+        if (usersDAO == null) {
+            usersDAO = new UsersDAO(DataSourceConfig.getDataSource());
+            session.setAttribute(UsersDAO.class.getSimpleName(), usersDAO);
+        }
+        return usersDAO;
     }
 
 
@@ -163,6 +173,5 @@ public class UsersDAO {
         }
         return allUsers;
     }
-
 
 }

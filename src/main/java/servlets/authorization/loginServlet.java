@@ -1,5 +1,7 @@
 package servlets.authorization;
 
+import services.UserManager;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -11,15 +13,22 @@ import java.io.IOException;
 public class loginServlet extends HttpServlet {
 
     public void init() throws ServletException {}
+    private UserManager userManager;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
+        userManager = UserManager.GetInstance(request.getSession());
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-
-        System.out.println("RECEIVED INFORMATION: " + username + ", " + password);
-        response.sendRedirect(request.getContextPath() + "/home");
-
+        String token = userManager.login(username, password);
+        if(token != null){
+            request.getSession().setAttribute("jwt", token);
+            response.sendRedirect(request.getContextPath() + "/home");
+        }else{
+            //failed login
+            response.sendRedirect(request.getContextPath() + "/login");
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
