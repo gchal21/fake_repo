@@ -28,7 +28,7 @@
         </tr>
         <%for(Announcement a : announcements){%>
         <tr>
-            <td><%=getUsernameById(a.getUserId(), users)%></td>
+            <td><a href="user?id=<%= a.getUserId() %>" class="link_to_user"><%=getUsernameById(a.getUserId(), users)%></a></td>
             <td class="table_middle_column"><%=a.getContent()%></td>
             <td><%=a.getCreateDate()%></td>
         </tr>

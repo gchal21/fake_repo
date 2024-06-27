@@ -75,3 +75,9 @@
     color: white;
     font-style: italic;
 }
+
+.link_to_user{
+    text-decoration: underline;
+    color: white;
+    font-style: italic;
+}
