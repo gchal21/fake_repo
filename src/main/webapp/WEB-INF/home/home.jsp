@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <style><%@include file="./css/home.css"%></style>
+    <style><%@include file="./styles/home.css"%></style>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,6 +18,23 @@
             </div>
 
             <jsp:include page="./navbar.jsp"/>
+
+            <div class="table_wrapper">
+                <%String section = (String)request.getAttribute("currentSection");%>
+                <%if(section.equals("Announcements")){%>
+                <jsp:include page="./sections/announcements.jsp"/>
+                <%} else if (section.equals("Popular Quizzes")){%>
+                <jsp:include page="./sections/popularQuizzes.jsp"/>
+                <%} else if (section.equals("Friends Activities")){%>
+                <jsp:include page="./sections/friendsActivities.jsp"/>
+                <%} else if (section.equals("My Recently Created Quizzes")){%>
+                <jsp:include page="./sections/myRecentlyCreatedQuizzes.jsp"/>
+                <%} else if (section.equals("My Recently Taken Quizzes")){%>
+                <jsp:include page="./sections/myRecentlyTakenQuizzes.jsp"/>
+                <%} else if (section.equals("Recently Created Quizzes")){%>
+                <jsp:include page="./sections/recentlyCreatedQuizzes.jsp"/>
+                <%}%>
+            </div>
 
         </section>
         <section class="sidebar">

@@ -13,13 +13,13 @@
     padding-right: 92px;
 }
 
-.navbar_wrapper > div > a{
+.navbar_wrapper button{
+    outline: none;
+    border: none;
+    background-color: transparent;
     color: #EE4E4E;
     font-size: 30px;
-}
-
-a{
-    text-decoration: none;
+    cursor: pointer;
 }
 
 .decorate_underline{

@@ -1,0 +1,1 @@
+<p>Popular Quizzes Table</p>

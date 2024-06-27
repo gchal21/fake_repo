@@ -7,7 +7,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<style><%@include file="./css/messages.css"%></style>
+<style><%@include file="./styles/messages.css"%></style>
 
 <div class="messages_container">
     <%List<Message> messages = (List<Message>)request.getAttribute("messages");%>
