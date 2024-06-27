@@ -1,0 +1,1 @@
+<p>Recently Created Quizzes Table</p>

@@ -1,7 +1,9 @@
 package servlets.home;
 
 import entities.Achievement;
+import entities.Announcement;
 import entities.Message;
+import entities.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +32,7 @@ public class homeServlet extends HttpServlet {
         //DUMMY DATA
         //userName = getUserName() -- from back
         userName = "Aslan Abashidze";
+        createUsersDummyData();
         createAchievementDummyData();
         createTablesDummyData();
         createMessagesDummyData();
@@ -37,11 +41,18 @@ public class homeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         manageSection(request, response);
+
+        request.setAttribute("currentSection", currentSection);
+        request.setAttribute("userName", userName);
+        request.setAttribute("achievements", achievements);
+        request.setAttribute("messages", messages);
+        request.getRequestDispatcher("/WEB-INF/home/home.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("currentSection", currentSection);
+        manageSection(request, response);
         request.setAttribute("userName", userName);
         request.setAttribute("achievements", achievements);
         request.setAttribute("messages", messages);
@@ -50,51 +61,52 @@ public class homeServlet extends HttpServlet {
 
 
     private List<Message> messages;
-    private List<String> announcements;
+    private List<Announcement> announcements;
     private List<String> popularQuizzes;
     private List<String> friendsActivities;
     private List<String> recentlyCreatedQuizzes;
     private List<String> myRecentlyTakenQuizzes;
     private List<String> myRecentlyCreatedQuizzes;
 
+    private List<User> users;
+
 
     private void manageSection(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String section = request.getParameter("section");
+
         if (section != null) {
             currentSection = section;
-        }else{
+        } else {
             currentSection = "Announcements";
         }
 
         switch (currentSection) {
             case "Popular Quizzes":
-                request.setAttribute("Popular Quizzes", popularQuizzes);
+                request.setAttribute("popularQuizzesData", popularQuizzes);
                 break;
             case "My Recently Created Quizzes":
-                request.setAttribute("My Recently Created Quizzes", myRecentlyCreatedQuizzes);
+                request.setAttribute("myRecentlyCreatedQuizzesData", myRecentlyCreatedQuizzes);
                 break;
             case "Recently Created Quizzes":
-                request.setAttribute("Recently Created Quizzes", recentlyCreatedQuizzes);
+                request.setAttribute("recentlyCreatedQuizzesData", recentlyCreatedQuizzes);
                 break;
             case "Friends Activities":
-                request.setAttribute("Friends Activities", friendsActivities);
+                request.setAttribute("friendsActivitiesData", friendsActivities);
                 break;
             case "My Recently Taken Quizzes":
-                request.setAttribute("My Recently Taken Quizzes", myRecentlyTakenQuizzes);
+                request.setAttribute("myRecentlyTakenQuizzesData", myRecentlyTakenQuizzes);
                 break;
             default:
-                request.setAttribute("Announcements", announcements);
-        }
-
-        String ajaxRequest = request.getHeader("X-Requested-With");
-        if ("XMLHttpRequest".equals(ajaxRequest)) {
-            response.setContentType("application/json");
-            response.getWriter().write("{\"currentSection\":\"" + currentSection + "\"}");
-        } else {
-            request.getRequestDispatcher("/WEB-INF/home/home.jsp").forward(request, response);
+                request.setAttribute("announcementsData", announcements);
+                request.setAttribute("userData", users);
         }
     }
 
+    private void createUsersDummyData(){
+        User u1 = new User(1, "Leonel Messi", "abc", "messi@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
+        User u2 = new User(2, "Raphael Leao", "def", "leao@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
+        this.users = Arrays.asList(u1, u2);
+    }
 
     private void createAchievementDummyData(){
         Achievement a1 = new Achievement("Amateur Author", "You Have Created A Quiz", "/images/achievements/amateurAuthor.png", new Timestamp(System.currentTimeMillis()));
@@ -116,18 +128,21 @@ public class homeServlet extends HttpServlet {
         this.recentlyCreatedQuizzes = new ArrayList<>();
         this.friendsActivities = new ArrayList<>();
         this.myRecentlyTakenQuizzes =  new ArrayList<>();
-        announcements.add("Announcement 1");
-        announcements.add("Announcement 2");
-        popularQuizzes.add("Quiz 1");
-        popularQuizzes.add("Quiz 2");
-        friendsActivities.add("Friend 1 took Quiz 3");
-        friendsActivities.add("Friend 2 created Quiz 4");
-        recentlyCreatedQuizzes.add("Quiz 5");
-        recentlyCreatedQuizzes.add("Quiz 6");
-        myRecentlyTakenQuizzes.add("Quiz 7");
-        myRecentlyTakenQuizzes.add("Quiz 8");
-        myRecentlyCreatedQuizzes.add("Quiz 9");
-        myRecentlyCreatedQuizzes.add("Quiz 10");
+
+        Announcement a1 = new Announcement(1, 1, "This is test announcement 1", randomTimeStampMinutesAgo(10));
+        Announcement a2 = new Announcement(2, 1, "This is test announcement 2", randomTimeStampMinutesAgo(50));
+        Announcement a3 = new Announcement(3, 1, "This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 ", getRandomTimestampWithinDays(3));
+        Announcement a4 = new Announcement(4, 2, "This is test announcement 4", getRandomTimestampWithinDays(7));
+        Announcement a5 = new Announcement(5, 1, "This is test announcement 5", getRandomTimestampWithinDays(10));
+        Announcement a6 = new Announcement(6, 1, "This is test announcement 6", getRandomTimestampWithinDays(15));
+        Announcement a7 = new Announcement(7, 1, "This is test announcement 7", getRandomTimestampWithinDays(20));
+        Announcement a8 = new Announcement(8, 2, "This is test announcement 8", getRandomTimestampWithinDays(30));
+        Announcement a9 = new Announcement(9, 2, "This is test announcement 9", getRandomTimestampWithinDays(60));
+        Announcement a10 = new Announcement(10, 1, "This is test announcement 10", getRandomTimestampWithinDays(90));
+
+        announcements = Arrays.asList(a1, a2, a3, a4, a5,
+                a6, a7, a8, a9, a10
+                );
     }
 
     private void createMessagesDummyData(){
@@ -146,5 +161,25 @@ public class homeServlet extends HttpServlet {
         messages = Arrays.asList(new Message[]{m1, m2, m3, m4, m5, m6, m7, m8, m9, m10});
 //        messages = Arrays.asList(new Message[]{m1, m2, m3, m4});
 //        messages = new ArrayList<>();
+    }
+
+    private static Timestamp randomTimeStampMinutesAgo(int minutesAgo) {
+        return new Timestamp(Timestamp.valueOf(LocalDateTime.now().minusMinutes(minutesAgo)).getTime());
+    }
+
+    // Generate a random timestamp within the last few hours
+    private static Timestamp getRandomTimestampWithinHours(int hoursAgo) {
+        long offset = Timestamp.valueOf(LocalDateTime.now().minusHours(hoursAgo)).getTime();
+        long end = Timestamp.valueOf(LocalDateTime.now()).getTime();
+        long diff = end - offset + 1;
+        return new Timestamp(offset + (long)(Math.random() * diff));
+    }
+
+    // Generate a random timestamp within the last few days
+    private static Timestamp getRandomTimestampWithinDays(int daysAgo) {
+        long offset = Timestamp.valueOf(LocalDateTime.now().minusDays(daysAgo)).getTime();
+        long end = Timestamp.valueOf(LocalDateTime.now()).getTime();
+        long diff = end - offset + 1;
+        return new Timestamp(offset + (long)(Math.random() * diff));
     }
 }

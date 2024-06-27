@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
-<style><%@include file="./css/achievements.css"%></style>
+<style><%@include file="./styles/achievements.css"%></style>
 
 <div class="achievements_wrapper">
 

@@ -7,7 +7,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<style><%@include file="./css/messages.css"%></style>
+<style><%@include file="./styles/messages.css"%></style>
 
 <div class="messages_container">
     <%List<Message> messages = (List<Message>)request.getAttribute("messages");%>
@@ -25,7 +25,7 @@
             <div class="border_box message_wrapper">
                 <div>
                     <div>
-                        <span class="itim-regular"><%=m.getSenderUsername()%></span>
+                        <a href="user?id=<%= m.getSenderUsername() %>" class="link_to_user"><%= m.getSenderUsername() %></a>
                         <span class="itim-regular"><%=formattedDate%></span>
                     </div>
                     <p class="itim-regular"><%=m.getContent()%></p>
