@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -128,16 +129,16 @@ public class homeServlet extends HttpServlet {
         this.friendsActivities = new ArrayList<>();
         this.myRecentlyTakenQuizzes =  new ArrayList<>();
 
-        Announcement a1 = new Announcement(1, 1, "This is test announcement 1", new Timestamp(System.currentTimeMillis()));
-        Announcement a2 = new Announcement(2, 1, "This is test announcement 2", new Timestamp(System.currentTimeMillis()));
-        Announcement a3 = new Announcement(3, 1, "This is test announcement 3 big announcement this is a test announcement 3 big announcement this is a test announcement big announcement this is a test announcement big announcement this is a test announcement big announcement this is a test announcement big announcement", new Timestamp(System.currentTimeMillis()));
-        Announcement a4 = new Announcement(4, 2, "This is test announcement 4", new Timestamp(System.currentTimeMillis()));
-        Announcement a5 = new Announcement(5, 1, "This is test announcement 5", new Timestamp(System.currentTimeMillis()));
-        Announcement a6 = new Announcement(6, 1, "This is test announcement 6", new Timestamp(System.currentTimeMillis()));
-        Announcement a7 = new Announcement(7, 1, "This is test announcement 7", new Timestamp(System.currentTimeMillis()));
-        Announcement a8 = new Announcement(8, 2, "This is test announcement 8", new Timestamp(System.currentTimeMillis()));
-        Announcement a9 = new Announcement(9, 2, "This is test announcement 9", new Timestamp(System.currentTimeMillis()));
-        Announcement a10 = new Announcement(10, 1, "This is test announcement 10", new Timestamp(System.currentTimeMillis()));
+        Announcement a1 = new Announcement(1, 1, "This is test announcement 1", randomTimeStampMinutesAgo(10));
+        Announcement a2 = new Announcement(2, 1, "This is test announcement 2", randomTimeStampMinutesAgo(50));
+        Announcement a3 = new Announcement(3, 1, "This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 ", getRandomTimestampWithinDays(3));
+        Announcement a4 = new Announcement(4, 2, "This is test announcement 4", getRandomTimestampWithinDays(7));
+        Announcement a5 = new Announcement(5, 1, "This is test announcement 5", getRandomTimestampWithinDays(10));
+        Announcement a6 = new Announcement(6, 1, "This is test announcement 6", getRandomTimestampWithinDays(15));
+        Announcement a7 = new Announcement(7, 1, "This is test announcement 7", getRandomTimestampWithinDays(20));
+        Announcement a8 = new Announcement(8, 2, "This is test announcement 8", getRandomTimestampWithinDays(30));
+        Announcement a9 = new Announcement(9, 2, "This is test announcement 9", getRandomTimestampWithinDays(60));
+        Announcement a10 = new Announcement(10, 1, "This is test announcement 10", getRandomTimestampWithinDays(90));
 
         announcements = Arrays.asList(a1, a2, a3, a4, a5,
                 a6, a7, a8, a9, a10
@@ -160,5 +161,25 @@ public class homeServlet extends HttpServlet {
         messages = Arrays.asList(new Message[]{m1, m2, m3, m4, m5, m6, m7, m8, m9, m10});
 //        messages = Arrays.asList(new Message[]{m1, m2, m3, m4});
 //        messages = new ArrayList<>();
+    }
+
+    private static Timestamp randomTimeStampMinutesAgo(int minutesAgo) {
+        return new Timestamp(Timestamp.valueOf(LocalDateTime.now().minusMinutes(minutesAgo)).getTime());
+    }
+
+    // Generate a random timestamp within the last few hours
+    private static Timestamp getRandomTimestampWithinHours(int hoursAgo) {
+        long offset = Timestamp.valueOf(LocalDateTime.now().minusHours(hoursAgo)).getTime();
+        long end = Timestamp.valueOf(LocalDateTime.now()).getTime();
+        long diff = end - offset + 1;
+        return new Timestamp(offset + (long)(Math.random() * diff));
+    }
+
+    // Generate a random timestamp within the last few days
+    private static Timestamp getRandomTimestampWithinDays(int daysAgo) {
+        long offset = Timestamp.valueOf(LocalDateTime.now().minusDays(daysAgo)).getTime();
+        long end = Timestamp.valueOf(LocalDateTime.now()).getTime();
+        long diff = end - offset + 1;
+        return new Timestamp(offset + (long)(Math.random() * diff));
     }
 }
