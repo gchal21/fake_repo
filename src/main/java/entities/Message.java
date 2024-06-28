@@ -3,17 +3,26 @@ package entities;
 import java.sql.Timestamp;
 
 public class Message {
+    //todo add sender id
+    private long senderId;
     private String senderUsername;
     private String content;
     private Timestamp sendDate;
 
-    public Message(String senderUsername, String content, Timestamp sendDate) {
+    public Message(long senderId,String senderUsername, String content, Timestamp sendDate) {
+        this.senderId = senderId;
         this.senderUsername = senderUsername;
         this.content = content;
         this.sendDate = sendDate;
 
     }
 
+    public long getSenderId() {
+        return senderId;
+    }
+    public void setSenderId(long senderId) {
+        this.senderId = senderId;
+    }
     public String getSenderUsername() {
         return senderUsername;
     }

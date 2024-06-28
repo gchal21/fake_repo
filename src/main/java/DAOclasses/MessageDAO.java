@@ -26,7 +26,7 @@ public class MessageDAO {
         ArrayList<Message> messages = new ArrayList<Message>();
         try {
             Connection conn=dataSource.getConnection();
-            String query = "SELECT u.username AS senderUsername, m.content AS content, m.sendDate AS date " +
+            String query = "SELECT m.senderId AS senderId, u.username AS senderUsername, m.content AS content, m.sendDate AS date " +
                     "FROM messages m " +
                     "JOIN users u ON m.senderId = u.id " +
                     "WHERE m.receiverId = ?;";
@@ -34,10 +34,11 @@ public class MessageDAO {
             statement.setLong(1, receiverId);
             ResultSet rs = statement.executeQuery();
             while(rs.next()){
+                long senderId=rs.getLong("senderId");
                 String senderUsername = rs.getString("senderUsername");
                 String content = rs.getString("content");
                 Timestamp sendDate = rs.getTimestamp("date");
-                messages.add(new Message(senderUsername, content, sendDate));
+                messages.add(new Message(senderId,senderUsername, content, sendDate));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
