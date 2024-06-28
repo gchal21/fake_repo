@@ -48,8 +48,6 @@ public class FrontHelpers {
         return DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now().minus(duration));
     }
 
-
-
     public static String formatTimestamp(Timestamp timestamp) {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime timestampDateTime = convertToLocalDateTime(timestamp);

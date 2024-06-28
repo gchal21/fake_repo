@@ -18,7 +18,6 @@ import java.util.List;
 public class homeServlet extends HttpServlet {
     //should come from back
     private String userName;
-    private List<Achievement> achievements;
 
     //handled by front
     private String currentSection;
@@ -27,7 +26,6 @@ public class homeServlet extends HttpServlet {
         currentSection = "Announcements";
 
         //DUMMY DATA
-        //userName = getUserName() -- from back
         userName = "Aslan Abashidze";
         createUsersDummyData();
         createAchievementDummyData();
@@ -56,14 +54,14 @@ public class homeServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/home/home.jsp").forward(request, response);
     }
 
-
+    private List<Achievement> achievements;
     private List<Message> messages;
     private List<Announcement> announcements;
     private List<Quiz> popularQuizzes;
     private List<String> friendsActivities;
-    private List<String> recentlyCreatedQuizzes;
-    private List<String> myRecentlyTakenQuizzes;
-    private List<String> myRecentlyCreatedQuizzes;
+    private List<Quiz> recentlyCreatedQuizzes;
+    private List<Quiz> myRecentlyTakenQuizzes;
+    private List<Quiz> myRecentlyCreatedQuizzes;
     private List<Category> categories;
 
     private List<User> users;
@@ -86,15 +84,21 @@ public class homeServlet extends HttpServlet {
                 break;
             case "My Recently Created Quizzes":
                 request.setAttribute("myRecentlyCreatedQuizzesData", myRecentlyCreatedQuizzes);
+                request.setAttribute("categoriesData", categories);
+                request.setAttribute("usersData", users);
                 break;
             case "Recently Created Quizzes":
                 request.setAttribute("recentlyCreatedQuizzesData", recentlyCreatedQuizzes);
+                request.setAttribute("categoriesData", categories);
+                request.setAttribute("usersData", users);
                 break;
             case "Friends Activities":
                 request.setAttribute("friendsActivitiesData", friendsActivities);
                 break;
             case "My Recently Taken Quizzes":
                 request.setAttribute("myRecentlyTakenQuizzesData", myRecentlyTakenQuizzes);
+                request.setAttribute("categoriesData", categories);
+                request.setAttribute("usersData", users);
                 break;
             default:
                 request.setAttribute("announcementsData", announcements);
@@ -124,10 +128,8 @@ public class homeServlet extends HttpServlet {
     }
 
     private void createTablesDummyData(){
-        this.myRecentlyCreatedQuizzes = new ArrayList<>();
-        this.recentlyCreatedQuizzes = new ArrayList<>();
         this.friendsActivities = new ArrayList<>();
-        this.myRecentlyTakenQuizzes =  new ArrayList<>();
+
 
         createDummyAnnouncementsData();
         createDummyQuizzesData();
@@ -162,6 +164,9 @@ public class homeServlet extends HttpServlet {
         Quiz q8 = new Quiz(8L, 4L, 100, randomTimeStampMinutesAgo(300).toLocalDateTime(), 1L, "Which Camel are you?", "This is the best quiz ever");
 
         popularQuizzes = Arrays.asList(q1, q2, q3, q4, q5, q6, q7, q8);
+        myRecentlyCreatedQuizzes = Arrays.asList(q1, q4, q6);
+        recentlyCreatedQuizzes = Arrays.asList(q4, q6);
+        myRecentlyTakenQuizzes = Arrays.asList(q2, q3, q4);
     }
 
     private void createDummyCategoriesData(){
