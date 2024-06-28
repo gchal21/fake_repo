@@ -25,7 +25,7 @@
             <div class="border_box message_wrapper">
                 <div>
                     <div>
-                        <span class="itim-regular"><%=m.getSenderUsername()%></span>
+                        <a href="user?id=<%= m.getSenderUsername() %>" class="link_to_user"><%= m.getSenderUsername() %></a>
                         <span class="itim-regular"><%=formattedDate%></span>
                     </div>
                     <p class="itim-regular"><%=m.getContent()%></p>
