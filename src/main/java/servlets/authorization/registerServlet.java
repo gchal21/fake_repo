@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet("/register")
 public class registerServlet extends HttpServlet {
@@ -18,7 +17,7 @@ public class registerServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        userManager = UserManager.GetInstance(request.getSession());
+        userManager = UserManager.getInstance(request.getSession());
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");

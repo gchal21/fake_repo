@@ -21,7 +21,7 @@ public class UserManager {
         this.usersDAO = usersDAO;
     }
 
-    public static UserManager GetInstance(HttpSession session){
+    public static UserManager getInstance(HttpSession session){
         UserManager userManager = (UserManager) session.getAttribute(UserManager.class.getSimpleName());
         if (userManager == null) {
             userManager = new UserManager(UsersDAO.getInstance(session));
