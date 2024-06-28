@@ -17,7 +17,7 @@ public class loginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-        userManager = UserManager.GetInstance(request.getSession());
+        userManager = UserManager.getInstance(request.getSession());
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");

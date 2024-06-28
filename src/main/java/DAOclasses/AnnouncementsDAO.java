@@ -2,7 +2,9 @@ package DAOclasses;
 
 import entities.Announcement;
 import org.apache.commons.dbcp2.BasicDataSource;
+import utils.DataSourceConfig;
 
+import javax.servlet.http.HttpSession;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,18 +13,46 @@ public class AnnouncementsDAO {
     private final BasicDataSource dataSource;
     private final String ANNOUNCEMENTS_TABLE = "announcements";
 
-    public AnnouncementsDAO(BasicDataSource source) {
+//    public AnnouncementsDAO(BasicDataSource source) {
+//        this.dataSource = source;
+//    }
+    private AnnouncementsDAO(BasicDataSource source) {
         this.dataSource = source;
     }
 
-    public void addAnnouncement(Announcement announcement) {
+    //kind of looks like a singleton pattern (in every session AnnouncementDAO is only created once)
+    public static AnnouncementsDAO getInstance(HttpSession session){
+        AnnouncementsDAO announcementsDAO = (AnnouncementsDAO) session.getAttribute(AnnouncementsDAO.class.getSimpleName());
+        if (announcementsDAO == null) {
+            announcementsDAO = new AnnouncementsDAO(DataSourceConfig.getDataSource());
+            session.setAttribute(AnnouncementsDAO.class.getSimpleName(), announcementsDAO);
+        }
+        return announcementsDAO;
+    }
+
+    public void addAnnouncement(long userId, String content) {
         try (Connection conn = dataSource.getConnection();
+//             PreparedStatement stmt = conn.prepareStatement(
+//                     "INSERT INTO " + ANNOUNCEMENTS_TABLE +
+//                             " (userId, content, createDate) VALUES (?, ?, ?)")) {
+//            stmt.setLong(1, announcement.getUserId());
+//            stmt.setString(2, announcement.getContent());
+//
+//
+//            // todo: not sure about if this is needed maybe do not pass createDate so that it
+//            //automatically sets current time in that column
+//            stmt.setTimestamp(3, announcement.getCreateDate());
              PreparedStatement stmt = conn.prepareStatement(
                      "INSERT INTO " + ANNOUNCEMENTS_TABLE +
-                             " (userId, content, createDate) VALUES (?, ?, ?)")) {
-            stmt.setLong(1, announcement.getUserId());
-            stmt.setString(2, announcement.getContent());
-            stmt.setTimestamp(3, announcement.getCreateDate());
+                             " (userId, content) VALUES (?, ?)")) {
+            stmt.setLong(1, userId);
+            stmt.setString(2, content);
+
+
+//            // todo: not sure about if this is needed maybe do not pass createDate so that it
+//            //automatically sets current time in that column
+//            stmt.setTimestamp(3, announcement.getCreateDate());
+
             stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Error adding announcement", e);

@@ -174,4 +174,36 @@ public class UsersDAO {
         return allUsers;
     }
 
+    /**
+     * returns true if the given user (id) has admin privileges
+     * @param userId
+     * @return
+     */
+    //todo check this later and make more convenient (roleId enum or something is needed i guess)
+    public boolean isAdmin(long userId){
+        boolean isAdmin=false;
+        try {
+            Connection conn =dataSource.getConnection();
+            String query="SELECT u.roleId" +
+                    " FROM "+USERS_TABLE+" AS u WHERE u.id = ? ;";
+            PreparedStatement statement =
+                    conn.prepareStatement(query);
+
+
+            statement.setLong(1, userId);
+            ResultSet rs = statement.executeQuery();
+
+            while(rs.next()){
+                int roleId = rs.getInt("roleId");
+                if(roleId==1){ //1 is admin and 2 is standard-user
+                    isAdmin=true;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return isAdmin;
+    }
+
 }
