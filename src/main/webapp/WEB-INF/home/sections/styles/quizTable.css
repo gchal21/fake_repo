@@ -1,0 +1,10 @@
+
+.table_width_limit_column{
+    max-width: 30%;
+    width: 30%;
+    word-wrap: break-word;
+}
+
+th{
+    font-size: 0.8em;
+}
