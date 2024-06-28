@@ -17,7 +17,7 @@ import java.util.List;
 @WebServlet("/home")
 public class homeServlet extends HttpServlet {
     //should come from back
-    private String userName;
+    private User currentUser;
 
     //handled by front
     private String currentSection;
@@ -26,7 +26,7 @@ public class homeServlet extends HttpServlet {
         currentSection = "Announcements";
 
         //DUMMY DATA
-        userName = "Aslan Abashidze";
+        currentUser = new User(0L, "Aslan Abashidze", "fajf", "aslani@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
         createUsersDummyData();
         createAchievementDummyData();
         createTablesDummyData();
@@ -38,7 +38,7 @@ public class homeServlet extends HttpServlet {
         manageSection(request, response);
 
         request.setAttribute("currentSection", currentSection);
-        request.setAttribute("userName", userName);
+        request.setAttribute("currentUser", currentUser);
         request.setAttribute("achievements", achievements);
         request.setAttribute("messages", messages);
         request.getRequestDispatcher("/WEB-INF/home/home.jsp").forward(request, response);
@@ -48,7 +48,7 @@ public class homeServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setAttribute("currentSection", currentSection);
         manageSection(request, response);
-        request.setAttribute("userName", userName);
+        request.setAttribute("currentUser", currentUser);
         request.setAttribute("achievements", achievements);
         request.setAttribute("messages", messages);
         request.getRequestDispatcher("/WEB-INF/home/home.jsp").forward(request, response);

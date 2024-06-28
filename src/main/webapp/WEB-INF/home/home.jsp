@@ -1,5 +1,6 @@
 <%@ page import="entities.Achievement" %>
 <%@ page import="java.util.List" %>
+<%@ page import="entities.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -39,10 +40,11 @@
         </section>
         <section class="sidebar">
             <div class="sidebar_header">
-                <p class="itim-regular"><%=request.getAttribute("userName")%></p>
+                <%User currentUser = (User)request.getAttribute("currentUser");%>
+                <a href="user?id=<%= currentUser.getId() %>" class="itim-regular"><%=currentUser.getUsername()%></a>
             </div>
 
-           <jsp:include page="./achievements.jsp"/>
+            <jsp:include page="./achievements.jsp"/>
 
             <jsp:include page="./messages.jsp" />
 

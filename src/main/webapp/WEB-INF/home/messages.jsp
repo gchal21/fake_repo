@@ -25,6 +25,7 @@
             <div class="border_box message_wrapper">
                 <div>
                     <div>
+<%--                        TODO:  m.getSenderID() - waiting for back--%>
                         <a href="user?id=<%= m.getSenderUsername() %>" class="link_to_user"><%= m.getSenderUsername() %></a>
                         <span class="itim-regular"><%=formattedDate%></span>
                     </div>
