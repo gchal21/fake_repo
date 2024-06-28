@@ -26,11 +26,11 @@ public class homeServlet extends HttpServlet {
         currentSection = "Announcements";
 
         //DUMMY DATA
-        currentUser = new User(0L, "Aslan Abashidze", "fajf", "aslani@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
         createUsersDummyData();
         createAchievementDummyData();
         createTablesDummyData();
         createMessagesDummyData();
+        System.out.println("HELLO FROM INIT");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -107,11 +107,12 @@ public class homeServlet extends HttpServlet {
     }
 
     private void createUsersDummyData(){
+        currentUser = new User(0L, "Aslan Abashidze", "fajf", "aslani@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
         User u1 = new User(1, "Leonel Messi", "abc", "messi@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
         User u2 = new User(2, "Raphael Leao", "def", "leao@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
         User u3 = new User(3, "Leonardo Dicaprio", "goal", "leo@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
         User u4 = new User(4, "Davit the Builder", "king", "dideba@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
-        this.users = Arrays.asList(u1, u2, u3, u4);
+        this.users = Arrays.asList(currentUser, u1, u2, u3, u4);
     }
 
     private void createAchievementDummyData(){
@@ -154,12 +155,12 @@ public class homeServlet extends HttpServlet {
     }
 
     private void createDummyQuizzesData(){
-        Quiz q1 = new Quiz(1L, 1L, 100, randomTimeStampMinutesAgo(10).toLocalDateTime(), 1L, "Which Country are you?", "This is the best quiz ever");
+        Quiz q1 = new Quiz(1L, 0L, 100, randomTimeStampMinutesAgo(10).toLocalDateTime(), 1L, "Which Country are you?", "This is the best quiz ever");
         Quiz q2 = new Quiz(2L, 1L, 20, randomTimeStampMinutesAgo(20).toLocalDateTime(), 2L, "Which Cheese are you?", "This is the best quiz ever");
         Quiz q3 = new Quiz(3L, 2L, 500, randomTimeStampMinutesAgo(100).toLocalDateTime(), 3L, "Which Car are you?", "This is the best quiz ever This is the best quiz ever This is the best quiz ever This is the best quiz ever This is the best quiz ever This is the best quiz ever This is the best quiz ever This is the best quiz ever");
-        Quiz q4 = new Quiz(4L, 3L, 5, randomTimeStampMinutesAgo(1000).toLocalDateTime(), 4L, "Which Color are you?", "This is the best quiz ever");
+        Quiz q4 = new Quiz(4L, 0L, 5, randomTimeStampMinutesAgo(1000).toLocalDateTime(), 4L, "Which Color are you?", "This is the best quiz ever");
         Quiz q5 = new Quiz(5L, 4L, 10, randomTimeStampMinutesAgo(16).toLocalDateTime(), 1L, "Which Christmas Carol are you?", "This is the best quiz ever");
-        Quiz q6 = new Quiz(6L, 1L, 100, randomTimeStampMinutesAgo(100).toLocalDateTime(), 2L, "Which Cat are you?", "This is the best quiz ever");
+        Quiz q6 = new Quiz(6L, 0L, 100, randomTimeStampMinutesAgo(100).toLocalDateTime(), 2L, "Which Cat are you?", "This is the best quiz ever");
         Quiz q7 = new Quiz(7L, 2L, 50, randomTimeStampMinutesAgo(100).toLocalDateTime(), 2L, "Which City are you?", "This is the best quiz ever");
         Quiz q8 = new Quiz(8L, 4L, 100, randomTimeStampMinutesAgo(300).toLocalDateTime(), 1L, "Which Camel are you?", "This is the best quiz ever");
 
