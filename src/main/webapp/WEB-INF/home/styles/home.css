@@ -68,6 +68,7 @@ body{
 .sidebar_header > a{
     color: white;
     font-size: 3em;
+    text-decoration: none;
 }
 
 .table_wrapper{

@@ -177,26 +177,26 @@ public class homeServlet extends HttpServlet {
         categories = Arrays.asList(c1, c2, c3, c4);
     }
 
-
-    //HELPERS
     private void createMessagesDummyData(){
-        Message m1 = new Message("Tengiz Kitovani", "Rafer xar", new Timestamp(System.currentTimeMillis()));
-        Message m2 = new Message("Eduard Shevardnadze", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", new Timestamp(System.currentTimeMillis()));
-        Message m3 = new Message("Mikheil Saakashvili", "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.", new Timestamp(System.currentTimeMillis()));
-        Message m4 = new Message("Gogita Gogolidze", "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form.", new Timestamp(System.currentTimeMillis()));
-        Message m5 = new Message("Sasha Vereli", "Saghol chemi", new Timestamp(System.currentTimeMillis()));
+        Message m1 = new Message(6L, "Tengiz Kitovani", "Rafer xar", new Timestamp(System.currentTimeMillis()));
+        Message m2 = new Message(7L, "Eduard Shevardnadze", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", new Timestamp(System.currentTimeMillis()));
+        Message m3 = new Message(8L, "Mikheil Saakashvili", "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.", new Timestamp(System.currentTimeMillis()));
+        Message m4 = new Message(9L, "Gogita Gogolidze", "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form.", new Timestamp(System.currentTimeMillis()));
+        Message m5 = new Message(10L,"Sasha Vereli", "Saghol chemi", new Timestamp(System.currentTimeMillis()));
 
-        Message m6 = new Message("Tengiz Kitovani", "Rafer xar", new Timestamp(System.currentTimeMillis()));
-        Message m7 = new Message("Eduard Shevardnadze", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", new Timestamp(System.currentTimeMillis()));
-        Message m8 = new Message("Mikheil Saakashvili", "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.", new Timestamp(System.currentTimeMillis()));
-        Message m9 = new Message("Gogita Gogolidze", "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form.", new Timestamp(System.currentTimeMillis()));
-        Message m10 = new Message("Sasha Vereli", "Saghol chemi", new Timestamp(System.currentTimeMillis()));
+        Message m6 = new Message(6L, "Tengiz Kitovani", "Rafer xar", new Timestamp(System.currentTimeMillis()));
+        Message m7 = new Message(7L, "Eduard Shevardnadze", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", new Timestamp(System.currentTimeMillis()));
+        Message m8 = new Message(8L, "Mikheil Saakashvili", "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.", new Timestamp(System.currentTimeMillis()));
+        Message m9 = new Message(9L, "Gogita Gogolidze", "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form.", new Timestamp(System.currentTimeMillis()));
+        Message m10 = new Message(10L, "Sasha Vereli", "Saghol chemi", new Timestamp(System.currentTimeMillis()));
 
         messages = Arrays.asList(new Message[]{m1, m2, m3, m4, m5, m6, m7, m8, m9, m10});
 //        messages = Arrays.asList(new Message[]{m1, m2, m3, m4});
 //        messages = new ArrayList<>();
     }
 
+
+    //HELPERS
     private static Timestamp randomTimeStampMinutesAgo(int minutesAgo) {
         return new Timestamp(Timestamp.valueOf(LocalDateTime.now().minusMinutes(minutesAgo)).getTime());
     }
