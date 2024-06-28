@@ -1,9 +1,6 @@
 package servlets.home;
 
-import entities.Achievement;
-import entities.Announcement;
-import entities.Message;
-import entities.User;
+import entities.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +17,7 @@ import java.util.List;
 @WebServlet("/home")
 public class homeServlet extends HttpServlet {
     //should come from back
-    private String userName;
-    private List<Achievement> achievements;
+    private User currentUser;
 
     //handled by front
     private String currentSection;
@@ -30,8 +26,7 @@ public class homeServlet extends HttpServlet {
         currentSection = "Announcements";
 
         //DUMMY DATA
-        //userName = getUserName() -- from back
-        userName = "Aslan Abashidze";
+        currentUser = new User(0L, "Aslan Abashidze", "fajf", "aslani@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
         createUsersDummyData();
         createAchievementDummyData();
         createTablesDummyData();
@@ -43,7 +38,7 @@ public class homeServlet extends HttpServlet {
         manageSection(request, response);
 
         request.setAttribute("currentSection", currentSection);
-        request.setAttribute("userName", userName);
+        request.setAttribute("currentUser", currentUser);
         request.setAttribute("achievements", achievements);
         request.setAttribute("messages", messages);
         request.getRequestDispatcher("/WEB-INF/home/home.jsp").forward(request, response);
@@ -53,20 +48,21 @@ public class homeServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setAttribute("currentSection", currentSection);
         manageSection(request, response);
-        request.setAttribute("userName", userName);
+        request.setAttribute("currentUser", currentUser);
         request.setAttribute("achievements", achievements);
         request.setAttribute("messages", messages);
         request.getRequestDispatcher("/WEB-INF/home/home.jsp").forward(request, response);
     }
 
-
+    private List<Achievement> achievements;
     private List<Message> messages;
     private List<Announcement> announcements;
-    private List<String> popularQuizzes;
+    private List<Quiz> popularQuizzes;
     private List<String> friendsActivities;
-    private List<String> recentlyCreatedQuizzes;
-    private List<String> myRecentlyTakenQuizzes;
-    private List<String> myRecentlyCreatedQuizzes;
+    private List<Quiz> recentlyCreatedQuizzes;
+    private List<Quiz> myRecentlyTakenQuizzes;
+    private List<Quiz> myRecentlyCreatedQuizzes;
+    private List<Category> categories;
 
     private List<User> users;
 
@@ -83,29 +79,39 @@ public class homeServlet extends HttpServlet {
         switch (currentSection) {
             case "Popular Quizzes":
                 request.setAttribute("popularQuizzesData", popularQuizzes);
+                request.setAttribute("categoriesData", categories);
+                request.setAttribute("usersData", users);
                 break;
             case "My Recently Created Quizzes":
                 request.setAttribute("myRecentlyCreatedQuizzesData", myRecentlyCreatedQuizzes);
+                request.setAttribute("categoriesData", categories);
+                request.setAttribute("usersData", users);
                 break;
             case "Recently Created Quizzes":
                 request.setAttribute("recentlyCreatedQuizzesData", recentlyCreatedQuizzes);
+                request.setAttribute("categoriesData", categories);
+                request.setAttribute("usersData", users);
                 break;
             case "Friends Activities":
                 request.setAttribute("friendsActivitiesData", friendsActivities);
                 break;
             case "My Recently Taken Quizzes":
                 request.setAttribute("myRecentlyTakenQuizzesData", myRecentlyTakenQuizzes);
+                request.setAttribute("categoriesData", categories);
+                request.setAttribute("usersData", users);
                 break;
             default:
                 request.setAttribute("announcementsData", announcements);
-                request.setAttribute("userData", users);
+                request.setAttribute("usersData", users);
         }
     }
 
     private void createUsersDummyData(){
         User u1 = new User(1, "Leonel Messi", "abc", "messi@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
         User u2 = new User(2, "Raphael Leao", "def", "leao@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
-        this.users = Arrays.asList(u1, u2);
+        User u3 = new User(3, "Leonardo Dicaprio", "goal", "leo@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
+        User u4 = new User(4, "Davit the Builder", "king", "dideba@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
+        this.users = Arrays.asList(u1, u2, u3, u4);
     }
 
     private void createAchievementDummyData(){
@@ -122,29 +128,57 @@ public class homeServlet extends HttpServlet {
     }
 
     private void createTablesDummyData(){
-        this.popularQuizzes = new ArrayList<>();
-        this.announcements = new ArrayList<>();
-        this.myRecentlyCreatedQuizzes = new ArrayList<>();
-        this.recentlyCreatedQuizzes = new ArrayList<>();
         this.friendsActivities = new ArrayList<>();
-        this.myRecentlyTakenQuizzes =  new ArrayList<>();
 
+
+        createDummyAnnouncementsData();
+        createDummyQuizzesData();
+        createDummyCategoriesData();
+    }
+
+    private void createDummyAnnouncementsData(){
         Announcement a1 = new Announcement(1, 1, "This is test announcement 1", randomTimeStampMinutesAgo(10));
         Announcement a2 = new Announcement(2, 1, "This is test announcement 2", randomTimeStampMinutesAgo(50));
-        Announcement a3 = new Announcement(3, 1, "This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 ", getRandomTimestampWithinDays(3));
+        Announcement a3 = new Announcement(3, 3, "This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 This is test announcement 3 ", getRandomTimestampWithinDays(3));
         Announcement a4 = new Announcement(4, 2, "This is test announcement 4", getRandomTimestampWithinDays(7));
         Announcement a5 = new Announcement(5, 1, "This is test announcement 5", getRandomTimestampWithinDays(10));
-        Announcement a6 = new Announcement(6, 1, "This is test announcement 6", getRandomTimestampWithinDays(15));
-        Announcement a7 = new Announcement(7, 1, "This is test announcement 7", getRandomTimestampWithinDays(20));
+        Announcement a6 = new Announcement(6, 4, "This is test announcement 6", getRandomTimestampWithinDays(15));
+        Announcement a7 = new Announcement(7, 4, "This is test announcement 7", getRandomTimestampWithinDays(20));
         Announcement a8 = new Announcement(8, 2, "This is test announcement 8", getRandomTimestampWithinDays(30));
         Announcement a9 = new Announcement(9, 2, "This is test announcement 9", getRandomTimestampWithinDays(60));
         Announcement a10 = new Announcement(10, 1, "This is test announcement 10", getRandomTimestampWithinDays(90));
 
         announcements = Arrays.asList(a1, a2, a3, a4, a5,
                 a6, a7, a8, a9, a10
-                );
+        );
     }
 
+    private void createDummyQuizzesData(){
+        Quiz q1 = new Quiz(1L, 1L, 100, randomTimeStampMinutesAgo(10).toLocalDateTime(), 1L, "Which Country are you?", "This is the best quiz ever");
+        Quiz q2 = new Quiz(2L, 1L, 20, randomTimeStampMinutesAgo(20).toLocalDateTime(), 2L, "Which Cheese are you?", "This is the best quiz ever");
+        Quiz q3 = new Quiz(3L, 2L, 500, randomTimeStampMinutesAgo(100).toLocalDateTime(), 3L, "Which Car are you?", "This is the best quiz ever This is the best quiz ever This is the best quiz ever This is the best quiz ever This is the best quiz ever This is the best quiz ever This is the best quiz ever This is the best quiz ever");
+        Quiz q4 = new Quiz(4L, 3L, 5, randomTimeStampMinutesAgo(1000).toLocalDateTime(), 4L, "Which Color are you?", "This is the best quiz ever");
+        Quiz q5 = new Quiz(5L, 4L, 10, randomTimeStampMinutesAgo(16).toLocalDateTime(), 1L, "Which Christmas Carol are you?", "This is the best quiz ever");
+        Quiz q6 = new Quiz(6L, 1L, 100, randomTimeStampMinutesAgo(100).toLocalDateTime(), 2L, "Which Cat are you?", "This is the best quiz ever");
+        Quiz q7 = new Quiz(7L, 2L, 50, randomTimeStampMinutesAgo(100).toLocalDateTime(), 2L, "Which City are you?", "This is the best quiz ever");
+        Quiz q8 = new Quiz(8L, 4L, 100, randomTimeStampMinutesAgo(300).toLocalDateTime(), 1L, "Which Camel are you?", "This is the best quiz ever");
+
+        popularQuizzes = Arrays.asList(q1, q2, q3, q4, q5, q6, q7, q8);
+        myRecentlyCreatedQuizzes = Arrays.asList(q1, q4, q6);
+        recentlyCreatedQuizzes = Arrays.asList(q4, q6);
+        myRecentlyTakenQuizzes = Arrays.asList(q2, q3, q4);
+    }
+
+    private void createDummyCategoriesData(){
+        Category c1 = new Category(1, "Geography");
+        Category c2 = new Category(2, "STEM");
+        Category c3 = new Category(3, "Linguistics");
+        Category c4 = new Category(4, "History");
+        categories = Arrays.asList(c1, c2, c3, c4);
+    }
+
+
+    //HELPERS
     private void createMessagesDummyData(){
         Message m1 = new Message("Tengiz Kitovani", "Rafer xar", new Timestamp(System.currentTimeMillis()));
         Message m2 = new Message("Eduard Shevardnadze", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", new Timestamp(System.currentTimeMillis()));
