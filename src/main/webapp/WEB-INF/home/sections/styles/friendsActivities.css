@@ -87,3 +87,11 @@
 .scrollable-container::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+
+.link_to_user{
+    text-decoration: underline;
+    color: black;
+    font-style: italic;
+}
+

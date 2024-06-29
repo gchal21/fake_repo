@@ -1,0 +1,38 @@
+.title{
+    font-size: 48px;
+    color: #EE4E4E;
+    padding: 35px 50px 35px 50px;
+}
+
+h1{
+    font-size: 48px;
+    color: #EE4E4E;
+    padding: 35px 50px 35px 50px;
+}
+
+p{
+    font-size: 24px;
+    color: black;
+    padding: 35px 50px 35px 50px;
+}
+
+body{
+    background-color: #FFF455;
+}
+
+.itim-regular {
+    font-family: "Itim", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+
+}
