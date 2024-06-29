@@ -7,8 +7,7 @@
 <body>
 <div>
     <h1 class="itim-regular">Error 404</h1>
-    <h1 class="itim-regular" >Oops! Something went wrong.</h1>
-    <p class="itim-regular">We're sorry for the inconvenience. Please try again later.</p>
+    <h1 class="itim-regular" >Page not found</h1>
 </div>
 </body>
 </html>
