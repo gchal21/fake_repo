@@ -16,11 +16,11 @@
             <p class="itim-regular">login</p>
             <form action="login" method="post">
                 <label id="user-name-label">
-                    <input type="text" placeholder="username or email" name="username" class="itim-regular">
+                    <input autocomplete="username" type="text" placeholder="username or email" name="username" class="itim-regular">
                 </label>
                 <div></div>
                 <label id="password-label">
-                    <input type="password" placeholder="password" name="password" class="itim-regular">
+                    <input autocomplete="password" type="password" placeholder="password" name="password" class="itim-regular">
                 </label>
                 <button class="itim-regular">login</button>
             </form>

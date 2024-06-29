@@ -1,7 +1,9 @@
 package servlets.user;
 
 import entities.Achievement;
+import entities.Friendship;
 import entities.User;
+import servlets.FriendshipStatus;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,12 +15,15 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
+import static servlets.FriendshipStatus.Pending;
+
 
 @WebServlet("/user")
 public class UserServlet extends HttpServlet {
 
     private User profile;
     private List<Achievement> achievements;
+    private List<Friendship> friendRequests;
 
     public void init() throws ServletException {}
 
@@ -26,6 +31,7 @@ public class UserServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setAttribute("profile", profile);
         request.setAttribute("achievements", achievements);
+        request.setAttribute("friendRequests", friendRequests);
         request.getRequestDispatcher("/WEB-INF/user/user.jsp").forward(request, response);
 
     }
@@ -36,12 +42,14 @@ public class UserServlet extends HttpServlet {
 
         request.setAttribute("profile", profile);
         request.setAttribute("achievements", achievements);
+        request.setAttribute("friendRequests", friendRequests);
         request.getRequestDispatcher("/WEB-INF/user/user.jsp").forward(request, response);
     }
 
     private void getProfile(HttpServletRequest request) {
         String userId = request.getParameter("id");
         //System.out.println("CURRENT USER: " + userId);
+
         //DUMMY DATA
         profile = new User(43L, "John Doe", "TAV", "johnDoe@gmail.com", new Timestamp(System.currentTimeMillis()), 1);
 
@@ -53,5 +61,12 @@ public class UserServlet extends HttpServlet {
         Achievement a6 = new Achievement("Practice Makes Perfect", "Great job! You've taken a quiz in practice mode, showing your dedication to improving and learning. Keep practicing and mastering your skills!", "/images/achievements/practiceMakesPerfect.png", new Timestamp(System.currentTimeMillis()));
         achievements = Arrays.asList(new Achievement[]{
                 a1, a2, a3, a4, a5, a6});
+
+
+        Friendship f1 = new Friendship(1L, "Gogita Gogolidze", 43L, "Pending", new Timestamp(System.currentTimeMillis()), null);
+        Friendship f2 = new Friendship(2L, "Sandro Kereselidze", 43L, "Pending", new Timestamp(System.currentTimeMillis()), null);
+        Friendship f3 = new Friendship(3L, "Mamuka Jugheli", 43L, "Pending", new Timestamp(System.currentTimeMillis()), null);
+
+        friendRequests = Arrays.asList(f1, f2, f3);
     }
 }

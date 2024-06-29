@@ -17,15 +17,15 @@
             <p class="itim-regular">register</p>
             <form action="register" method="post">
                 <label id="email-label">
-                    <input type="email" placeholder="email" name="email" class="itim-regular">
+                    <input autocomplete="email" type="email" placeholder="email" name="email" class="itim-regular">
                 </label>
                 <div></div>
                 <label id="user-name-label">
-                    <input type="text" placeholder="username" name="username" class="itim-regular">
+                    <input autocomplete="username" type="text" placeholder="username" name="username" class="itim-regular">
                 </label>
                 <div></div>
                 <label id="password-label">
-                    <input type="password" placeholder="password" name="password" class="itim-regular">
+                    <input autocomplete="password" type="password" placeholder="password" name="password" class="itim-regular">
                 </label>
                 <button class="itim-regular">register</button>
             </form>

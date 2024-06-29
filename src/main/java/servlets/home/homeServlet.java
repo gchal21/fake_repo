@@ -30,6 +30,7 @@ public class homeServlet extends HttpServlet {
         createAchievementDummyData();
         createTablesDummyData();
         createMessagesDummyData();
+        createDummyFriendsActivitiesData();
         System.out.println("HELLO FROM INIT");
     }
 
@@ -194,6 +195,27 @@ public class homeServlet extends HttpServlet {
         messages = Arrays.asList(new Message[]{m1, m2, m3, m4, m5, m6, m7, m8, m9, m10});
 //        messages = Arrays.asList(new Message[]{m1, m2, m3, m4});
 //        messages = new ArrayList<>();
+    }
+
+    private void createDummyFriendsActivitiesData(){
+        //TODO:
+        /*
+            activities = []
+
+            for friend in currentUser.getFriends():
+                friendAchievements = friend.getAchivements()
+                for achievement in friendAchivements:
+                    activities.push({date: achievement.getDate()
+                                    content: friend.getUsername() + " aqcuired achievement" + achievement.getName()
+                                    })
+
+                friendTakenQuizzes = friend.getTakenQuizzes()
+                for quiz in friendTakenQuizzes:
+                    activities.push({date: quiz.getDate() როცა გააკეთა ქვიზი
+
+                friendCreatedQuizzes = friend.getCreatedQuizzes()
+
+         */
     }
 
 

@@ -35,11 +35,22 @@
                 </div>
             <%}%>
         </div>
+
+        <jsp:include page="friendRequests.jsp"/>
+
+        <div class="logout_container">
+            <button class="itim-regular button_red" onclick="logout()">Log Out</button>
+        </div>
     </div>
 </body>
 <script>
     function redirectToHome() {
         window.location.href = '/home';
+    }
+
+    function logout(){
+        //call to log out;
+        window.location.href = '/login';
     }
 </script>
 </html>

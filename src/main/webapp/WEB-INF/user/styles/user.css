@@ -76,7 +76,8 @@ body{
 }
 
 .profile_achievements{
-    padding-top: 15px;
+    padding: 15px 0 20px 0;
+    border-bottom: 2px solid white;
 }
 
 .profile_achievements_header{
@@ -109,4 +110,24 @@ body{
 .user_achievement_icon{
     width: 170px;
     aspect-ratio: 1/1;
+}
+
+.logout_container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 51px 0 59px 0;
+}
+
+.logout_container button{
+    height: 88px;
+    width: 40%;
+    border-radius: 10px;
+    font-size: 2em;
+
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    letter-spacing: 0.1em;
 }
