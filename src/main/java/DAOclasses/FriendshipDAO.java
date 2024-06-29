@@ -114,12 +114,13 @@ public class FriendshipDAO {
      * @param acceptedRequest
      * @return
      */
-    public ArrayList<Friendship> getRequests(long userId, boolean acceptedRequest){
+    public ArrayList<Friendship> getDeclinedOrAcceptedFriends(long userId, boolean acceptedRequest){
         ArrayList<Friendship> friendships = new ArrayList<>();
 
         try {
             Connection conn=dataSource.getConnection();
-            String query = "SELECT f.senderId, f.receiverId, f.status, f.sendDate, f.executionDate FROM friendship f " +
+            String query = "SELECT f.senderId, u.username, f.receiverId, f.status, f.sendDate, f.executionDate " +
+                    "FROM friendship f JOIN users u ON u.id = f.senderId " +
                     "WHERE (f.senderId = ? OR f.receiverId = ?) AND f.status = ? ; ";
             PreparedStatement statement = conn.prepareStatement(query);
             statement.setLong(1, userId);
@@ -133,6 +134,7 @@ public class FriendshipDAO {
             while(resultSet.next()){
                 Friendship newFriendship=new Friendship(
                         resultSet.getLong("senderId"),
+                        resultSet.getString("username"),
                         resultSet.getLong("receiverId"),
                         resultSet.getString("status"),
                         resultSet.getTimestamp("sendDate"),
@@ -155,12 +157,14 @@ public class FriendshipDAO {
      * @param userId
      * @return
      */
+    //todo add sender username
     public ArrayList<Friendship> getReceivedRequestInfo(long userId){
         ArrayList<Friendship> friendships = new ArrayList<>();
 
         try {
             Connection conn=dataSource.getConnection();
-            String query = "SELECT f.senderId, f.receiverId, f.status, f.sendDate, f.executionDate FROM friendship f " +
+            String query = "SELECT f.senderId, u.username, f.receiverId, f.status, f.sendDate, f.executionDate " +
+                    "FROM friendship f JOIN users u ON u.id = f.senderId " +
                     "WHERE f.receiverId = ? AND f.status = ? ; ";
             PreparedStatement statement = conn.prepareStatement(query);
             statement.setLong(1, userId);
@@ -169,6 +173,7 @@ public class FriendshipDAO {
             while(resultSet.next()){
                 Friendship newFriendship=new Friendship(
                         resultSet.getLong("senderId"),
+                        resultSet.getString("username"),
                         resultSet.getLong("receiverId"),
                         resultSet.getString("status"),
                         resultSet.getTimestamp("sendDate"),
