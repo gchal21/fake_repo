@@ -26,11 +26,11 @@ public class homeServlet extends HttpServlet {
         currentSection = "Announcements";
 
         //DUMMY DATA
-        currentUser = new User(0L, "Aslan Abashidze", "fajf", "aslani@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
         createUsersDummyData();
         createAchievementDummyData();
         createTablesDummyData();
         createMessagesDummyData();
+        System.out.println("HELLO FROM INIT");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -107,11 +107,12 @@ public class homeServlet extends HttpServlet {
     }
 
     private void createUsersDummyData(){
+        currentUser = new User(0L, "Aslan Abashidze", "fajf", "aslani@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
         User u1 = new User(1, "Leonel Messi", "abc", "messi@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
         User u2 = new User(2, "Raphael Leao", "def", "leao@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
         User u3 = new User(3, "Leonardo Dicaprio", "goal", "leo@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
         User u4 = new User(4, "Davit the Builder", "king", "dideba@freeuni.edu.ge", new Timestamp(System.currentTimeMillis()), 1);
-        this.users = Arrays.asList(u1, u2, u3, u4);
+        this.users = Arrays.asList(currentUser, u1, u2, u3, u4);
     }
 
     private void createAchievementDummyData(){
@@ -154,12 +155,12 @@ public class homeServlet extends HttpServlet {
     }
 
     private void createDummyQuizzesData(){
-        Quiz q1 = new Quiz(1L, 1L, 100, randomTimeStampMinutesAgo(10).toLocalDateTime(), 1L, "Which Country are you?", "This is the best quiz ever");
+        Quiz q1 = new Quiz(1L, 0L, 100, randomTimeStampMinutesAgo(10).toLocalDateTime(), 1L, "Which Country are you?", "This is the best quiz ever");
         Quiz q2 = new Quiz(2L, 1L, 20, randomTimeStampMinutesAgo(20).toLocalDateTime(), 2L, "Which Cheese are you?", "This is the best quiz ever");
         Quiz q3 = new Quiz(3L, 2L, 500, randomTimeStampMinutesAgo(100).toLocalDateTime(), 3L, "Which Car are you?", "This is the best quiz ever This is the best quiz ever This is the best quiz ever This is the best quiz ever This is the best quiz ever This is the best quiz ever This is the best quiz ever This is the best quiz ever");
-        Quiz q4 = new Quiz(4L, 3L, 5, randomTimeStampMinutesAgo(1000).toLocalDateTime(), 4L, "Which Color are you?", "This is the best quiz ever");
+        Quiz q4 = new Quiz(4L, 0L, 5, randomTimeStampMinutesAgo(1000).toLocalDateTime(), 4L, "Which Color are you?", "This is the best quiz ever");
         Quiz q5 = new Quiz(5L, 4L, 10, randomTimeStampMinutesAgo(16).toLocalDateTime(), 1L, "Which Christmas Carol are you?", "This is the best quiz ever");
-        Quiz q6 = new Quiz(6L, 1L, 100, randomTimeStampMinutesAgo(100).toLocalDateTime(), 2L, "Which Cat are you?", "This is the best quiz ever");
+        Quiz q6 = new Quiz(6L, 0L, 100, randomTimeStampMinutesAgo(100).toLocalDateTime(), 2L, "Which Cat are you?", "This is the best quiz ever");
         Quiz q7 = new Quiz(7L, 2L, 50, randomTimeStampMinutesAgo(100).toLocalDateTime(), 2L, "Which City are you?", "This is the best quiz ever");
         Quiz q8 = new Quiz(8L, 4L, 100, randomTimeStampMinutesAgo(300).toLocalDateTime(), 1L, "Which Camel are you?", "This is the best quiz ever");
 
@@ -177,26 +178,26 @@ public class homeServlet extends HttpServlet {
         categories = Arrays.asList(c1, c2, c3, c4);
     }
 
-
-    //HELPERS
     private void createMessagesDummyData(){
-        Message m1 = new Message("Tengiz Kitovani", "Rafer xar", new Timestamp(System.currentTimeMillis()));
-        Message m2 = new Message("Eduard Shevardnadze", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", new Timestamp(System.currentTimeMillis()));
-        Message m3 = new Message("Mikheil Saakashvili", "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.", new Timestamp(System.currentTimeMillis()));
-        Message m4 = new Message("Gogita Gogolidze", "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form.", new Timestamp(System.currentTimeMillis()));
-        Message m5 = new Message("Sasha Vereli", "Saghol chemi", new Timestamp(System.currentTimeMillis()));
+        Message m1 = new Message(6L, "Tengiz Kitovani", "Rafer xar", new Timestamp(System.currentTimeMillis()));
+        Message m2 = new Message(7L, "Eduard Shevardnadze", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", new Timestamp(System.currentTimeMillis()));
+        Message m3 = new Message(8L, "Mikheil Saakashvili", "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.", new Timestamp(System.currentTimeMillis()));
+        Message m4 = new Message(9L, "Gogita Gogolidze", "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form.", new Timestamp(System.currentTimeMillis()));
+        Message m5 = new Message(10L,"Sasha Vereli", "Saghol chemi", new Timestamp(System.currentTimeMillis()));
 
-        Message m6 = new Message("Tengiz Kitovani", "Rafer xar", new Timestamp(System.currentTimeMillis()));
-        Message m7 = new Message("Eduard Shevardnadze", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", new Timestamp(System.currentTimeMillis()));
-        Message m8 = new Message("Mikheil Saakashvili", "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.", new Timestamp(System.currentTimeMillis()));
-        Message m9 = new Message("Gogita Gogolidze", "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form.", new Timestamp(System.currentTimeMillis()));
-        Message m10 = new Message("Sasha Vereli", "Saghol chemi", new Timestamp(System.currentTimeMillis()));
+        Message m6 = new Message(6L, "Tengiz Kitovani", "Rafer xar", new Timestamp(System.currentTimeMillis()));
+        Message m7 = new Message(7L, "Eduard Shevardnadze", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", new Timestamp(System.currentTimeMillis()));
+        Message m8 = new Message(8L, "Mikheil Saakashvili", "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.", new Timestamp(System.currentTimeMillis()));
+        Message m9 = new Message(9L, "Gogita Gogolidze", "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form.", new Timestamp(System.currentTimeMillis()));
+        Message m10 = new Message(10L, "Sasha Vereli", "Saghol chemi", new Timestamp(System.currentTimeMillis()));
 
         messages = Arrays.asList(new Message[]{m1, m2, m3, m4, m5, m6, m7, m8, m9, m10});
 //        messages = Arrays.asList(new Message[]{m1, m2, m3, m4});
 //        messages = new ArrayList<>();
     }
 
+
+    //HELPERS
     private static Timestamp randomTimeStampMinutesAgo(int minutesAgo) {
         return new Timestamp(Timestamp.valueOf(LocalDateTime.now().minusMinutes(minutesAgo)).getTime());
     }

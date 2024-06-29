@@ -76,8 +76,7 @@
     font-style: italic;
 }
 
-.link_to_user{
-    text-decoration: underline;
+.message_link_to_user{
+    text-decoration: none;
     color: white;
-    font-style: italic;
 }
