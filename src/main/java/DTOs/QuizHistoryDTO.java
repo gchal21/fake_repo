@@ -46,6 +46,15 @@ public class QuizHistoryDTO {
         Time = time;
     }
 
+    public QuizHistoryDTO(long userId, String userName, Date writeDate, int score, double time) {
+        this.UserId = userId;
+        this.UserName = userName;
+        this.WriteDate = writeDate;
+        this.Score = score;
+        this.Time = time;
+    }
+
+
     private Date WriteDate;
     private int Score;
     private double Time;

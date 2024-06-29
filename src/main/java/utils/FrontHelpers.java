@@ -68,7 +68,59 @@ public class FrontHelpers {
         }
     }
 
-    private static LocalDateTime convertToLocalDateTime(Timestamp timestamp) {
-        return timestamp.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+    public static String formatDate(java.util.Date date) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime dateTime = convertToLocalDateTime(date);
+
+        if (dateTime.toLocalDate().isEqual(now.toLocalDate())) {
+            return "today";
+        }
+
+        Duration duration = Duration.between(dateTime, now);
+
+        if (duration.toMinutes() < 60) {
+            return duration.toMinutes() + " minutes ago";
+        } else if (duration.toHours() < 24) {
+            long hours = duration.toHours();
+            long minutes = duration.toMinutes() % 60;
+            return hours + " hours and " + minutes + " minutes ago";
+        } else if (duration.toDays() < 10) {
+            return duration.toDays() + " days ago";
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            return dateTime.format(formatter);
+        }
     }
+
+    private static LocalDateTime convertToLocalDateTime(java.util.Date date) {
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
+
+    public static String formatSeconds(double seconds) {
+        long totalSeconds = (long) seconds;
+        long minutes = totalSeconds / 60;
+        long remainingSeconds = totalSeconds % 60;
+        long hours = minutes / 60;
+        long remainingMinutes = minutes % 60;
+        long days = hours / 24;
+        long remainingHours = hours % 24;
+
+        StringBuilder formattedTime = new StringBuilder();
+
+        if (days > 0) {
+            formattedTime.append(days).append(" days ");
+        }
+        if (hours > 0) {
+            formattedTime.append(remainingHours).append(" hours ");
+        }
+        if (minutes > 0) {
+            formattedTime.append(remainingMinutes).append(" minutes ");
+        }
+        if (seconds < 60) {
+            formattedTime.append(remainingSeconds).append(" seconds");
+        }
+
+        return formattedTime.toString().trim();
+    }
+
 }

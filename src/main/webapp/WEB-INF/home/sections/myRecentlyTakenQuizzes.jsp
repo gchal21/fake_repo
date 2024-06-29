@@ -23,7 +23,7 @@
         </tr>
         <%for(Quiz quiz: myRecentlyTakenQuizzes){%>
         <tr>
-            <td><a href="quiz?id=<%= quiz.getId() %>" class="link_to_user"><%= quiz.getTitle() %></a></td>
+            <td><a href="quizSummary?id=<%= quiz.getId() %>" class="link_to_user"><%= quiz.getTitle() %></a></td>
             <td class="table_width_limit_column"><%=quiz.getDescription()%></td>
             <td><a href="user?id=<%=quiz.getCreatorId()%>"  class="link_to_user"><%=FrontHelpers.getUsernameById(quiz.getCreatorId(), users)%></a></td>
             <td><%=FrontHelpers.getCategoryById(quiz.getCategoryId(), categories)%></td>

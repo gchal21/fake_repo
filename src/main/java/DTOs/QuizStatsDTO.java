@@ -19,5 +19,11 @@ public class QuizStatsDTO {
         AverageScore = averageScore;
     }
 
+    public QuizStatsDTO(int userCount, double averageScore) {
+        this.UserCount = userCount;
+        this.AverageScore = averageScore;
+    }
+
+
     private double AverageScore;
 }
