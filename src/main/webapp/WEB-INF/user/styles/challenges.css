@@ -1,0 +1,62 @@
+.challenges_container{
+    padding: 35px 0 45px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 2px solid white;
+}
+
+.challenges_header{
+    font-size: 2em;
+    padding-bottom: 25px;
+}
+
+.challenges{
+    background-color: #FFF455;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    min-height: 100px;
+}
+
+.challenge{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    padding: 20px 69px 18px 49px;
+}
+
+.challenge:not(:last-of-type){
+    border-bottom: 2px solid white;
+}
+
+.challenge p{
+    font-size: 1.3em;
+}
+
+.challenge_data{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.challenge_buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.challenge_buttons button{
+    text-align: center;
+
+    outline: none;
+    border: none;
+    border-radius: 10px;
+
+    width: 148px;
+    height: 39px;
+    font-size: 1.2em;
+    cursor: pointer;
+}

@@ -38,6 +38,8 @@
 
         <jsp:include page="friendRequests.jsp"/>
 
+        <jsp:include page="challenges.jsp"/>
+
         <div class="logout_container">
             <button class="itim-regular button_red" onclick="logout()">Log Out</button>
         </div>

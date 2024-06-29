@@ -1,5 +1,6 @@
 package servlets.user;
 
+import DTOs.ChallengeDTO;
 import entities.Achievement;
 import entities.Friendship;
 import entities.User;
@@ -24,6 +25,7 @@ public class UserServlet extends HttpServlet {
     private User profile;
     private List<Achievement> achievements;
     private List<Friendship> friendRequests;
+    private List<ChallengeDTO> challenges;
 
     public void init() throws ServletException {}
 
@@ -32,6 +34,7 @@ public class UserServlet extends HttpServlet {
         request.setAttribute("profile", profile);
         request.setAttribute("achievements", achievements);
         request.setAttribute("friendRequests", friendRequests);
+        request.setAttribute("challenges", challenges);
         request.getRequestDispatcher("/WEB-INF/user/user.jsp").forward(request, response);
 
     }
@@ -43,6 +46,7 @@ public class UserServlet extends HttpServlet {
         request.setAttribute("profile", profile);
         request.setAttribute("achievements", achievements);
         request.setAttribute("friendRequests", friendRequests);
+        request.setAttribute("challenges", challenges);
         request.getRequestDispatcher("/WEB-INF/user/user.jsp").forward(request, response);
     }
 
@@ -68,5 +72,11 @@ public class UserServlet extends HttpServlet {
         Friendship f3 = new Friendship(3L, "Mamuka Jugheli", 43L, "Pending", new Timestamp(System.currentTimeMillis()), null);
 
         friendRequests = Arrays.asList(f1, f2, f3);
+
+        ChallengeDTO c1 = new ChallengeDTO(1, "Mariam Japaridze", 1, "Calculus Quiz", 89);
+        ChallengeDTO c2 = new ChallengeDTO(2, "Levani Pilpani", 2, "Chemistry Quiz", 43);
+        ChallengeDTO c3 = new ChallengeDTO(3, "Giorgi Chalagashvili", 3, "Cars Quiz", 76);
+
+        challenges = Arrays.asList(c1, c2, c3);
     }
 }

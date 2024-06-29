@@ -43,6 +43,14 @@ public class ChallengeDTO {
         SenderMaxScore = senderMaxScore;
     }
 
+    public ChallengeDTO(long senderId, String senderName, long quizId, String quizName, int senderMaxScore) {
+        this.SenderId = senderId;
+        this.SenderName = senderName;
+        this.QuizId = quizId;
+        this.QuizName = quizName;
+        this.SenderMaxScore = senderMaxScore;
+    }
+
     private String SenderName;
     private long QuizId;
     private String QuizName;
