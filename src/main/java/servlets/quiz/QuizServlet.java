@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.sql.Array;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -42,10 +43,15 @@ public class QuizServlet extends HttpServlet {
         QuizHistoryDTO q7 = new QuizHistoryDTO(6, "Smith John", new Date(1912-1900, 3, 15), 3, 24); // Sinking of the Titanic, April 15, 1912
         QuizHistoryDTO q8 = new QuizHistoryDTO(7, "Adam Marx", new Date(2001-1900, 8, 11), 6, 256436); // September 11 Attacks, September 11, 2001
 
-        myPerformace = Arrays.asList(q1, q2, q3, q4);
-        highestPerformances = Arrays.asList(q4, q5, q6);
-        lastDayHighestPerformances = Arrays.asList(q7, q8, q1, q2, q3);
-        mostRecentPerformances = Arrays.asList(q1, q2);
+//        myPerformace = Arrays.asList(q1, q2, q3, q4);
+//        highestPerformances = Arrays.asList(q4, q5, q6);
+//        lastDayHighestPerformances = Arrays.asList(q7, q8, q1, q2, q3);
+//        mostRecentPerformances = Arrays.asList(q1, q2);
+
+        myPerformace = new ArrayList<>();
+        highestPerformances = new ArrayList<>();
+        lastDayHighestPerformances = new ArrayList<>();
+        mostRecentPerformances = new ArrayList<>();
 
         quizStatsDTO = new QuizStatsDTO(1034, 173.7);
     }
