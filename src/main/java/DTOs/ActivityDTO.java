@@ -7,6 +7,17 @@ import enums.ActivityType;
 import java.util.Date;
 
 public class ActivityDTO {
+
+    public ActivityDTO(ActivityType type, long userId, String userName, Date createDate, Achievement achievement, QuizDTO quiz){
+        this.Type = type;
+        this.UserId = userId;
+        this.UserName = userName;
+        this.CreateDate = createDate;
+        this.Achievement = achievement;
+        this.Quiz = quiz;
+    }
+
+
     private ActivityType Type;
 
     public ActivityType getType() {

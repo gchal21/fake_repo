@@ -1,6 +1,16 @@
 package DTOs;
 
+import com.sun.xml.internal.bind.v2.model.annotation.Quick;
+
 public class QuizDTO {
+
+
+    public QuizDTO(long id, String name, String creatorName, long creatorId){
+        this.Id = id;
+        this.Name = name;
+        this.CreatorName = creatorName;
+        this.CreatorId = creatorId;
+    }
     private long Id;
 
     public long getId() {

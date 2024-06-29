@@ -1,0 +1,89 @@
+
+
+.itim-regular {
+    font-family: "Itim", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.content-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: auto;
+}
+
+
+.scrollable-container {
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+
+    width: 100%;
+    border-radius: 25px;
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.activity-block {
+    padding: 10px 30px 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    height: 4rem;
+}
+
+.activity-block p {
+    margin: 5px 0;
+    font-size: 20px;
+
+
+}
+
+.info{
+    width: 100%;
+    text-align: center;
+}
+
+
+.scrollable-container > div:nth-child(even) {
+    background-color: #FFD700;
+    color: #333333;
+}
+
+.scrollable-container > div:nth-child(odd) {
+    background-color: #FFFACD;
+    color: #333333;
+}
+
+
+.activity-block:last-child {
+    border-bottom: none;
+}
+
+.no-activities {
+    font-size: 16px;
+    color: #777;
+    text-align: center;
+    margin-top: 50px;
+}
+
+
+
+.scrollable-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+
+.scrollable-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

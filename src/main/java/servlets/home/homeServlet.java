@@ -1,6 +1,9 @@
 package servlets.home;
 
+import DTOs.ActivityDTO;
+import DTOs.QuizDTO;
 import entities.*;
+import enums.ActivityType;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +15,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet("/home")
@@ -59,7 +63,7 @@ public class homeServlet extends HttpServlet {
     private List<Message> messages;
     private List<Announcement> announcements;
     private List<Quiz> popularQuizzes;
-    private List<String> friendsActivities;
+    private List<ActivityDTO> friendsActivities;
     private List<Quiz> recentlyCreatedQuizzes;
     private List<Quiz> myRecentlyTakenQuizzes;
     private List<Quiz> myRecentlyCreatedQuizzes;
@@ -111,13 +115,38 @@ public class homeServlet extends HttpServlet {
     }
 
     private void createTablesDummyData(){
-        this.friendsActivities = new ArrayList<>();
 
 
+        createDummyFriendActivitiesData();
         createDummyAnnouncementsData();
         createDummyQuizzesData();
         createDummyCategoriesData();
     }
+
+    private void createDummyFriendActivitiesData(){
+        Achievement achievement1 = new Achievement("Achievement 1", "Description 1", "imageUrl1", new Timestamp(System.currentTimeMillis()));
+        QuizDTO quiz1 = new QuizDTO(1L, "Quiz 1", "Description 1", 1L);
+
+        // Create dummy data for activities
+        ActivityDTO activity1 = new ActivityDTO(ActivityType.QUIZ_WRITTEN, 1L, "User 1", new Date(), achievement1, quiz1);
+        ActivityDTO activity2 = new ActivityDTO(ActivityType.QUIZ_CREATED, 2L, "User 2", new Date(), achievement1, quiz1);
+        ActivityDTO activity3 = new ActivityDTO(ActivityType.ACHIEVEMENT_ACQUIRED, 3L, "User 3", new Date(), achievement1, quiz1);
+        ActivityDTO activity4 = new ActivityDTO(ActivityType.QUIZ_WRITTEN, 1L, "User 1", new Date(), achievement1, quiz1);
+        ActivityDTO activity5 = new ActivityDTO(ActivityType.QUIZ_CREATED, 2L, "User 2", new Date(), achievement1, quiz1);
+        ActivityDTO activity6 = new ActivityDTO(ActivityType.ACHIEVEMENT_ACQUIRED, 3L, "User 3", new Date(), achievement1, quiz1);
+        ActivityDTO activity7 = new ActivityDTO(ActivityType.QUIZ_WRITTEN, 1L, "User 1", new Date(), achievement1, quiz1);
+        ActivityDTO activity8 = new ActivityDTO(ActivityType.QUIZ_CREATED, 2L, "User 2", new Date(), achievement1, quiz1);
+        ActivityDTO activity9 = new ActivityDTO(ActivityType.ACHIEVEMENT_ACQUIRED, 3L, "User 3", new Date(), achievement1, quiz1);
+        ActivityDTO activity10 = new ActivityDTO(ActivityType.QUIZ_WRITTEN, 1L, "User 1", new Date(), achievement1, quiz1);
+        ActivityDTO activity11 = new ActivityDTO(ActivityType.QUIZ_CREATED, 2L, "User 2", new Date(), achievement1, quiz1);
+        ActivityDTO activity12 = new ActivityDTO(ActivityType.ACHIEVEMENT_ACQUIRED, 3L, "User 3", new Date(), achievement1, quiz1);
+
+
+        friendsActivities = Arrays.asList(activity1, activity2, activity3, activity4, activity5, activity6, activity7, activity8, activity9, activity10, activity11, activity12);
+
+    }
+
+
 
     private void createDummyAnnouncementsData(){
         Announcement a1 = new Announcement(1, 1, "This is test announcement 1", randomTimeStampMinutesAgo(10));
