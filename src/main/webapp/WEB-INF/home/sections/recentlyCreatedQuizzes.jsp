@@ -23,9 +23,9 @@
         </tr>
         <%for(Quiz quiz: recentlyCreatedQuizzes){%>
         <tr>
-            <td><%=quiz.getTitle()%></td>
+            <td><a href="quiz?id=<%= quiz.getId() %>" class="link_to_user"><%= quiz.getTitle() %></a></td>
             <td class="table_width_limit_column"><%=quiz.getDescription()%></td>
-            <td><%=FrontHelpers.getUsernameById(quiz.getCreatorId(), users)%></td>
+            <td><a href="user?id=<%=quiz.getCreatorId()%>"  class="link_to_user"><%=FrontHelpers.getUsernameById(quiz.getCreatorId(), users)%></a></td>
             <td><%=FrontHelpers.getCategoryById(quiz.getCategoryId(), categories)%></td>
             <td><%=quiz.getMaxScore()%></td>
             <td><%=FrontHelpers.formatLocalDateTime(quiz.getCreateDate())%></td>
