@@ -77,34 +77,15 @@ public class homeServlet extends HttpServlet {
             currentSection = "Announcements";
         }
 
-        switch (currentSection) {
-            case "Popular Quizzes":
-                request.setAttribute("popularQuizzesData", popularQuizzes);
-                request.setAttribute("categoriesData", categories);
-                request.setAttribute("usersData", users);
-                break;
-            case "My Recently Created Quizzes":
-                request.setAttribute("myRecentlyCreatedQuizzesData", myRecentlyCreatedQuizzes);
-                request.setAttribute("categoriesData", categories);
-                request.setAttribute("usersData", users);
-                break;
-            case "Recently Created Quizzes":
-                request.setAttribute("recentlyCreatedQuizzesData", recentlyCreatedQuizzes);
-                request.setAttribute("categoriesData", categories);
-                request.setAttribute("usersData", users);
-                break;
-            case "Friends Activities":
-                request.setAttribute("friendsActivitiesData", friendsActivities);
-                break;
-            case "My Recently Taken Quizzes":
-                request.setAttribute("myRecentlyTakenQuizzesData", myRecentlyTakenQuizzes);
-                request.setAttribute("categoriesData", categories);
-                request.setAttribute("usersData", users);
-                break;
-            default:
-                request.setAttribute("announcementsData", announcements);
-                request.setAttribute("usersData", users);
-        }
+        request.setAttribute("popularQuizzesData", popularQuizzes);
+        request.setAttribute("categoriesData", categories);
+        request.setAttribute("usersData", users);
+        request.setAttribute("myRecentlyCreatedQuizzesData", myRecentlyCreatedQuizzes);
+        request.setAttribute("recentlyCreatedQuizzesData", recentlyCreatedQuizzes);
+        request.setAttribute("friendsActivitiesData", friendsActivities);
+        request.setAttribute("myRecentlyTakenQuizzesData", myRecentlyTakenQuizzes);
+        request.setAttribute("announcementsData", announcements);
+
     }
 
     private void createUsersDummyData(){

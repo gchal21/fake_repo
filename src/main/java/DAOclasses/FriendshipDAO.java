@@ -152,7 +152,7 @@ public class FriendshipDAO {
 
 
     /**
-     * returns list of Friendship object - where receiver user is always given userId
+     * returns list of Friendship object - where receiver user is given as userId
      * and the request status is 'PENDING' right now
      * @param userId
      * @return
